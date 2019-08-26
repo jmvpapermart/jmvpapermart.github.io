@@ -8,6 +8,95 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js'></script>
+	
+	<script>
+	var data = [
+	
+	{
+		"name":"U2FsdGVkX19tpNqQRvgfchy2X8c2zARuhRuFxQTqyv5H2dgDXbf5hRQA4B5tkuAW", 
+		"tin": "U2FsdGVkX18h0zmOFhYyNwu6aOSqjx3pKspJex0mPog=", 
+		"add":["U2FsdGVkX19bsxt+Yrmz9P5nMU1qxYWxFzMcU/G/vy9A7+9JI46+orRLyqx/JnlC","U2FsdGVkX1/FJ7YeXeOvlyu+ggrM7JhfxZSZms1JRANHFU82P28/MQWJjHiR+yaa","U2FsdGVkX1+JBisC+BT1yPJwMooGZN9WgtMxfBOTbfja3a27VpogrvdTH1M1GgSo","U2FsdGVkX1/suPU81pNeVOBP/eU/xryvSbIHz4A6eh4="]
+	},
+		
+	{"name":"U2FsdGVkX1+oBEdLL9a6yRIDDSbxHUyhxiwWbuwmeJV1+GdWLHrjrhfIcxZOsS/1", "tin": "U2FsdGVkX19iI2dMmIRDaj7d2gM4/ywsD/2OgqnlosI=", "add":["U2FsdGVkX1+Px4GnY/FIHdD3EfhAFaO4iKy2RJeEy/w=","U2FsdGVkX1+poVkFVZ773M6kfJG2avCwX3OMa/tYxLQ=","U2FsdGVkX18hl5KH29fCTlyLpsWHbrDjpLdttjCzRlpkjqz/9midg9bBSi3i3FzE","U2FsdGVkX199gdiAfrsDcbD2xiKM5xCij5ku9yJsEkE="]},
+		
+	{"name":"U2FsdGVkX1/rq+iOA6BQKIAmg8eh82aj3JFlJXR5yPm/Rkat09a8OHUnrNG2mo6A", "tin": "U2FsdGVkX1/Pp13l1S7cqJgU6cAdgZ9k2/VVYlHlGPw=", "add":["U2FsdGVkX1/jgxe7sPREJOECMU00CAFSAgfQ2sVjeYF95e+4MpQ5C0ZXEDNOVX0y","U2FsdGVkX19xq35jj6Zth3v6r+z3NdDKOKV3qaRsCRk=","U2FsdGVkX19MxH7RnFomv66N5VNx/MaRbQTFv0pKn5fGl390EFDhZJwQXdscsinv","U2FsdGVkX1+1OXCBNYuzNN+3aaAKXq3TJHZofDHLf1w="]},
+	
+	{"name":"U2FsdGVkX1/gFkUvovaNJ1+VBL+H2dGI9k/8FFmN2va6HrqLFQsSiHysCqPcUzXO", "tin": "U2FsdGVkX19sNfEOPOBRt1vwQ3H5VhBoVlrzktG32OE=", "add":["U2FsdGVkX19XUr8F/uQAyjiq4lV8hS1KbxSKRJhWqCg=","U2FsdGVkX18i8FFafVZeEFKKl2v6QX3xsdc+uTXKlDE=","U2FsdGVkX1/EIzxLPvnXZIbg8BAepMZzSjBq0BcAoggIZ0ubGPZT4i9mE4u46cMC","U2FsdGVkX1/TXzqKSTq5vOocAlRD8h3xoo70DV4j+II="]},
+		
+	{"name":"U2FsdGVkX18sdYCcwX3xtXzBTG8JHloDep+CdCZsS/Q/lwdzH64yZ4eG8C4BajnK", "tin": "U2FsdGVkX1/Ex9JGZyvxo9cT6KccknMh17AE2YdHXb4=", "add":["U2FsdGVkX19LBwnasgiW04gQCNZXvKG8fkEB2tARpItno0pmd0gm9oNwszWHb5yM","U2FsdGVkX1+EUGToZr+w5sq//OIR1NVsJIR/LqoFCyc=","U2FsdGVkX19dD+ZThK8m0DZGxacbW9t3C87R8UYS4Jo=","U2FsdGVkX1/8nBHQHa7odwjJh9yawX2AaSOdIBQkipM="]},
+	
+	{"name":"U2FsdGVkX1+WunJ6mbVCWeTQi4sPAeb42LP4RgzkSOWwyWgexZsC3Yhga1+XcZHLX+Tu8iWoAvUTlN0260BxMA==", "tin": "U2FsdGVkX19Gt05iYsgERUOQfp/NzEmmZXOrL00Oecg=", "add":["U2FsdGVkX1+tgmLYZ6BnANPSf7Qitt780VwsnXfnn8o=","U2FsdGVkX19NXnTMZiw+A1wWJOGq7tGjIrcQKJUWhfaZs/tlWrG71iR1WOPFOL0H","U2FsdGVkX19xu8YtDAxE4rDF3ub54ncuyFHtNcE2SqR6h+BXBVe1eloyhTC/nqVSGcIQbO3bY1aXt2KRaLrp9w==","U2FsdGVkX1+gp/IS3hECO9GHdUbq8szwW1ba3CSZ5HERRzRE6o+8JaRn2LEZBOxp"]},
+		
+	{"name":"U2FsdGVkX1++U7NPUVW2zqsfO3YGYXugxOgJMDNtWcL3GBOIQ5ZUgQare9TquS0Ep5R9ibPmwt9mcjHMtqKPng==", "tin": "U2FsdGVkX1+LmGy282CW11dmNboIXgQj+xMrwlbDGEg=", "add":["U2FsdGVkX1/Et5W5XPC+ewmtTKX9rOF+dzNzYZUVweLkNJB/xnMVMuuAsbx+yPpV","U2FsdGVkX1/y/d2KU2hzFnHp93ZHl0pBmac1d8XocvFKWfR9lpYitcpTQMODaJum","U2FsdGVkX19E7xOHu1fB1nM+2CaEy5CtrkYQZtfXUBMmVNO/mTTOd8A+T4jsYv4XtHs3JdTq/1OoU2z3XSIUFQ==","U2FsdGVkX18s7Id8G+ZiP3Ks46qbRhoxADGh/8I6N7FjiUZfX3DTt+nD7stdC2r+"]},
+		
+	{"name":"U2FsdGVkX1+wQNT/A8jDg5KfwBZjKi/SBBwLmQK++1bb/5WH+ix+VFr7OEaZGoHV", "tin": "U2FsdGVkX1/RoPIJjgDMs74MYgA6qSNmp3m94s5LhWk=", "add":["U2FsdGVkX1+5o71g4hODJ659NbWOSob0Hyx96Mx7WYY=","U2FsdGVkX1/2c2RSsPWwN1lsjiyqMj84CJttbDLMVoXois+XTteIfwJyIyNWRQ3t","U2FsdGVkX1/xXXJYZey9PwU0CVF5fSvDW+Dex0X217o=","U2FsdGVkX1/ANlEoOXkkjGTzd0QmSfdb34b2CIds9sz7pV4OQaKCSAnod7Ur2l4w"]},
+		
+	{"name":"U2FsdGVkX1/3H2TWDGe4dELBaFI9iGyNF+OKmt98+rqKIRATvogRb3aEGJ3ZENV7", "tin": "U2FsdGVkX19/YtenOglBDBQt7DHfqMvguZApdW1jTAI=", "add":["U2FsdGVkX19reJVdwsvcDlK/HyZvamXI34jUGR3T37ZrOLecGeM3hl5T3oqGAhqA","U2FsdGVkX1+mvcYh6msi+rIZSfuy2pYq/kBXolf+E8o=","U2FsdGVkX1/xp5v9k127IQGTRuvYJ6/mwg31tkY8FFOCy29YfW1DjX0cdrMHaS/V","U2FsdGVkX1+tEpPDR2kqQN0OrSoIR0QIVluij+UC8vw="]},
+		
+	{"name":"U2FsdGVkX1/nQCjPCxt9xYrDv8FSl9WZM76Ee7madcs=", "tin": "U2FsdGVkX1+CAJcZmE9qhyiLlSw1idlZ6HMHfdWoGio=", "add":["U2FsdGVkX19p8R2PFoXtBzzdrKp00nQS4u1FKigxEYUWclfqlsSd6W9ow+5FufCg","U2FsdGVkX1/2dF2lYEewJ25XMK6bzd72zSa+PluZaQo=","U2FsdGVkX1+V49GgIoow7Un+JGWUTyLDfnum1UsrJ0w=","U2FsdGVkX19cfUxAgj9hNCdbNryElZHS5UKwkKW5guE="]},
+		
+	{"name":"U2FsdGVkX1/7h2RrJVcN8XJCLoAxS5GJDiVi7JGC1r8=", "tin": "U2FsdGVkX1/d3vYJwu5U1IDCcbTMPt4mclHOtnZul0E=", "add":["U2FsdGVkX1/jBRSF+esCm89FvLbfVQkiOvdkHzOy8pOoO4om+wIiAHIJPqtGVYtT","U2FsdGVkX1/ZT985Q5GN8D1rWyt+ZkMVlPp0GzpxBurlpIVJ7IiTqSZusWqLsCRi","U2FsdGVkX19Hjjx0+ubgDU7TEmoe0D+0/sodADnSzZk=","U2FsdGVkX19sr6GFa2A3+og6QC7vNTVC4jG6jOjt1qNikzQiIIgqQDZgwi7RUcbu"]}
+		
+		
+]
+;
+		function entry(tin, a)
+		{
+			o = {"tin":tin, "add":a};
+			return o;
+		}
+	
+		var ddata = {};
+		function decrypt()
+		{
+			var key = document.getElementById("dec_comp").value;
+			
+			for(each in data)
+				{
+					
+					var dname = CryptoJS.AES.decrypt(data[each].name, key).toString(CryptoJS.enc.Utf8);
+					document.getElementById("companies").innerHTML += "<option>"+dname+"</option>"
+					var ttin = new String();
+					ttin = CryptoJS.AES.decrypt(data[each].tin, key).toString(CryptoJS.enc.Utf8);
+					var tadd = new Array();
+					for(a in data[each].add)
+						{
+							var n = CryptoJS.AES.decrypt(data[each].add[a], key).toString(CryptoJS.enc.Utf8);
+							
+							tadd.push(n);
+						}
+					console.log(tadd);
+					var temp = new entry(ttin, tadd);
+					ddata[dname] = temp;
+				}
+			
+			console.log(ddata);
+		}
+		
+		
+		function update()
+		{
+			var x = document.getElementById("companies").value;
+			console.log(ddata[x]);
+			document.getElementById("tin").value = ddata[x].tin;
+			document.getElementById("pl1").value = ddata[x].add[0];
+			document.getElementById("pl2").value = ddata[x].add[1];
+			document.getElementById("pl3").value = ddata[x].add[2];
+			document.getElementById("pl4").value = ddata[x].add[3];
+			document.getElementById("pname").value = x;
+		}
+		
+		function changecase()
+		{
+			var vno = document.getElementById("vno");
+			var x = vno.value;
+			vno.value = x.toUpperCase();
+			
+		}
+	</script>
+	
 </head>
 <body>
   
@@ -15,6 +104,17 @@
 	<CENTER><H1>JAI MAA VAISHNO PAPER MART</H1>
 		<hr>
   <table cellpadding=5px>
+	  
+	  <tr>
+	  <td colspan="2"><input type="password" id="dec_comp" class="form-control"></td>
+		  <td><button class="btn" style="width:100%" onclick="decrypt()">Decrypt</button></td>
+	  
+	  </tr>
+	  
+	  
+	  
+	  
+	  
 	   <form action='#' method='post'>
 	  <tr>
 		  
@@ -25,7 +125,7 @@
  <input type='password' name='strex' id='strex' size='25'  class="form-control"/>
 		  </td>
 		  <td >
-			<center>  <input type='button' id='cryptstr' value='Hash password'  class="btn"/></center>
+			<center>  <input type='button' id='cryptstr' value='Hash password'  class="btn" style="width:100%"/></center>
 		  </td>
 			  </tr>
 
@@ -85,6 +185,14 @@ document.getElementById('cryptstr').onclick = function(){
 		<td colspan="2"><input type="date" name="d" id="d" class="form-control" placeholder="date"></td>
 		
 		<td><input type="number" name="ino" id="ino" class="form-control" placeholder="Invoice Number" ></td>
+	</tr>
+	
+	<tr>
+		<td colspan="3" >
+		<select id="companies" style="width:100%" class="form-control" onclick="update()">
+			
+			</select>
+		</td>
 	</tr>
 	
 	<tr>
@@ -159,7 +267,7 @@ document.getElementById('cryptstr').onclick = function(){
 	
 	<tr>
 		<td>Vehicle Number</td>
-		<td colspan="2"><input type="text" name="vno" id="vno" class="form-control"></td>
+		<td colspan="2"><input type="text" name="vno" id="vno" class="form-control" onkeyup="changecase()"></td>
 	</tr>
 	
 	<tr>
@@ -170,5 +278,7 @@ document.getElementById('cryptstr').onclick = function(){
 </table>
 </CENTER>
 	</div>
+	
+	
 </body>
 </html>
