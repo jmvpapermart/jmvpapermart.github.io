@@ -86,6 +86,13 @@
 			document.getElementById("pl3").value = ddata[x].add[2];
 			document.getElementById("pl4").value = ddata[x].add[3];
 			document.getElementById("pname").value = x;
+			
+			document.getElementById("btin").value = ddata[x].tin;
+			document.getElementById("sl1").value = ddata[x].add[0];
+			document.getElementById("sl2").value = ddata[x].add[1];
+			document.getElementById("sl3").value = ddata[x].add[2];
+			document.getElementById("sl4").value = ddata[x].add[3];
+			document.getElementById("bname").value = x;
 		}
 		
 		function changecase()
@@ -94,6 +101,33 @@
 			var x = vno.value;
 			vno.value = x.toUpperCase();
 			
+		}
+		
+		function same()
+		{
+			if(document.getElementById("sametick").checked == true)
+				{
+					document.getElementById("sl1").value = document.getElementById("pl1").value;
+					document.getElementById("sl2").value = document.getElementById("pl2").value;
+					document.getElementById("sl3").value = document.getElementById("pl3").value;
+					document.getElementById("sl4").value = document.getElementById("pl4").value;
+					document.getElementById("btin").value = document.getElementById("tin").value;
+					document.getElementById("bname").value = document.getElementById("pname").value;
+				}
+			
+		}
+		
+		function clearsame()
+		{
+			if(document.getElementById("cleartick").checked == true)
+				{
+					document.getElementById("sl1").value = "";
+					document.getElementById("sl2").value = "";
+					document.getElementById("sl3").value = "";
+					document.getElementById("sl4").value = "";
+					document.getElementById("btin").value = "";
+					document.getElementById("bname").value = "";
+				}
 		}
 	</script>
 	
@@ -177,10 +211,7 @@ document.getElementById('cryptstr').onclick = function(){
 	<td colspan="3"><input name='strcrypt' id='strcrypt' size='58'  type="TEXT" class="form-control" readonly /></td>
 	</tr>
 	
-	<tr>
-		<td>Party email</td>
-		<td colspan="2"><input type="email" name="pmail" id="pmail" class="form-control"></td>
-	</tr>
+	
 	<tr>
 		<td colspan="2"><input type="date" name="d" id="d" class="form-control" placeholder="date"></td>
 		
@@ -195,29 +226,51 @@ document.getElementById('cryptstr').onclick = function(){
 		</td>
 	</tr>
 	
+	
+	
+	<tr>
+		<td></td>
+		<td>Billed to</td>
+		<td>Shipped to<br>
+		(Same as Billing Address) <input type="checkbox" onclick="same()" id="sametick"><br>
+			(Clear) <input type="checkbox" onclick="clearsame()" id="cleartick">
+		</td>
+	</tr>
+	
 	<tr>
 		<td>Party Name</td>
-		<td colspan="2"><input type="text" name="pname" id="pname" class="form-control"></td>
+		<td ><input type="text" name="pname" id="pname" class="form-control"></td>
+		<td ><input type="text" name="bname" id="bname" class="form-control"></td>
 	</tr>
 	
 	<tr>
 		<td>Address Line 1</td>
-		<td colspan="2"><input type="text" name="pl1" id="pl1" class="form-control"></td>
+		<td><input type="text" name="pl1" id="pl1" class="form-control"></td>
+		<td><input type="text" name="sl1" id="sl1" class="form-control"></td>
 	</tr>
 	
 	<tr>
 		<td>Line 2</td>
-		<td colspan="2"><input type="text" name="pl2" id="pl2"  class="form-control"></td>
+		<td  ><input type="text" name="pl2" id="pl2"  class="form-control"></td>
+		<td><input type="text" name="sl2" id="sl2" class="form-control"></td>
 	</tr>
 	
 	<tr>
 		<td>Line 3</td>
-		<td colspan="2"><input type="text" name="pl3" id="pl3" class="form-control"></td>
+		<td  ><input type="text" name="pl3" id="pl3" class="form-control"></td>
+		<td><input type="text" name="sl3" id="sl3" class="form-control"></td>
 	</tr>
 	
 	<tr>
 		<td>Line 4</td>
-		<td colspan="2"><input type="text" name="pl4" id="pl4" class="form-control"></td>
+		<td  ><input type="text" name="pl4" id="pl4" class="form-control"></td>
+		<td><input type="text" name="sl4" id="sl4" class="form-control"></td>
+	</tr>
+	
+	<tr>
+		<td>GST TIN</td>
+		<td><input type="text" name="tin" id="tin" class="form-control"></td>
+		<td><input type="text" name="btin" id="btin" class="form-control"></td>
 	</tr>
 	
 	<tr>
@@ -240,10 +293,7 @@ document.getElementById('cryptstr').onclick = function(){
 		<td colspan="2"><input type="number" name="hsn" id="hsn" value="4810" class="form-control"></td>
 	</tr>
 	
-	<tr>
-		<td>GST TIN</td>
-		<td colspan="2"><input type="text" name="tin" id="tin" class="form-control"></td>
-	</tr>
+	
 	
 	<tr>
 		<td>Cartridge and Freight</td>
